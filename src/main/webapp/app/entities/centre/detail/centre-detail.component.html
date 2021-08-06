@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="centre">
+      <h2 data-cy="centreDetailsHeading"><span>Centre</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ centre.id }}</span>
+        </dd>
+        <dt><span>Centre Name</span></dt>
+        <dd>
+          <span>{{ centre.centreName }}</span>
+        </dd>
+        <dt><span>Centre Chief</span></dt>
+        <dd>
+          <span>{{ centre.centreChief }}</span>
+        </dd>
+        <dt><span>Arrondissement</span></dt>
+        <dd>
+          <div *ngIf="centre.arrondissement">
+            <a [routerLink]="['/arrondissement', centre.arrondissement?.id, 'view']">{{ centre.arrondissement?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/centre', centre.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

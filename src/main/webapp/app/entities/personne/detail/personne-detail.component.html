@@ -1,0 +1,70 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <div *ngIf="personne">
+      <h2 data-cy="personneDetailsHeading"><span>Personne</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ personne.id }}</span>
+        </dd>
+        <dt><span ngbTooltip="The firstname attribute.">First Name</span></dt>
+        <dd>
+          <span>{{ personne.firstName }}</span>
+        </dd>
+        <dt><span>Last Name</span></dt>
+        <dd>
+          <span>{{ personne.lastName }}</span>
+        </dd>
+        <dt><span>Father Name</span></dt>
+        <dd>
+          <span>{{ personne.fatherName }}</span>
+        </dd>
+        <dt><span>Sexe</span></dt>
+        <dd>
+          <span>{{ personne.sexe }}</span>
+        </dd>
+        <dt><span>Mother First Name</span></dt>
+        <dd>
+          <span>{{ personne.motherFirstName }}</span>
+        </dd>
+        <dt><span>Mother Last Name</span></dt>
+        <dd>
+          <span>{{ personne.motherLastName }}</span>
+        </dd>
+        <dt><span>Date Of Birthday</span></dt>
+        <dd>
+          <span>{{ personne.dateOfBirthday | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Hour Of Bithday</span></dt>
+        <dd>
+          <span>{{ personne.hourOfBithday | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Number Register</span></dt>
+        <dd>
+          <span>{{ personne.numberRegister }}</span>
+        </dd>
+        <dt><span>Centre</span></dt>
+        <dd>
+          <div *ngIf="personne.centre">
+            <a [routerLink]="['/centre', personne.centre?.id, 'view']">{{ personne.centre?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/personne', personne.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

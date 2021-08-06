@@ -1,0 +1,142 @@
+<div class="row justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-personne-heading" data-cy="PersonneCreateUpdateHeading">Create or edit a Personne</h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="editForm.get('id')!.value == null">
+          <label class="form-control-label" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_firstName" ngbTooltip="The firstname attribute.">First Name</label>
+          <input type="text" class="form-control" name="firstName" id="field_firstName" data-cy="firstName" formControlName="firstName" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_lastName">Last Name</label>
+          <input type="text" class="form-control" name="lastName" id="field_lastName" data-cy="lastName" formControlName="lastName" />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_fatherName">Father Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="fatherName"
+            id="field_fatherName"
+            data-cy="fatherName"
+            formControlName="fatherName"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_sexe">Sexe</label>
+          <select class="form-control" name="sexe" formControlName="sexe" id="field_sexe" data-cy="sexe">
+            <option [ngValue]="null"></option>
+            <option value="MASCULIN">MASCULIN</option>
+            <option value="FEMININ">FEMININ</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_motherFirstName">Mother First Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="motherFirstName"
+            id="field_motherFirstName"
+            data-cy="motherFirstName"
+            formControlName="motherFirstName"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_motherLastName">Mother Last Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="motherLastName"
+            id="field_motherLastName"
+            data-cy="motherLastName"
+            formControlName="motherLastName"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_dateOfBirthday">Date Of Birthday</label>
+          <div class="d-flex">
+            <input
+              id="field_dateOfBirthday"
+              data-cy="dateOfBirthday"
+              type="datetime-local"
+              class="form-control"
+              name="dateOfBirthday"
+              formControlName="dateOfBirthday"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_hourOfBithday">Hour Of Bithday</label>
+          <div class="d-flex">
+            <input
+              id="field_hourOfBithday"
+              data-cy="hourOfBithday"
+              type="datetime-local"
+              class="form-control"
+              name="hourOfBithday"
+              formControlName="hourOfBithday"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_numberRegister">Number Register</label>
+          <input
+            type="number"
+            class="form-control"
+            name="numberRegister"
+            id="field_numberRegister"
+            data-cy="numberRegister"
+            formControlName="numberRegister"
+          />
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="field_centre">Centre</label>
+          <select class="form-control" id="field_centre" data-cy="centre" name="centre" formControlName="centre">
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="centreOption.id === editForm.get('centre')!.value?.id ? editForm.get('centre')!.value : centreOption"
+              *ngFor="let centreOption of centresSharedCollection; trackBy: trackCentreById"
+            >
+              {{ centreOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span>Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span>Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

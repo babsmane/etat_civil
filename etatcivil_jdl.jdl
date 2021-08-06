@@ -1,0 +1,77 @@
+
+entity Region {
+	regionCode Integer,
+	regionName String required
+}
+
+entity Department {
+	departmentCode Integer,
+	departmentName String required
+}
+
+entity Commune {
+	communeCode Integer,
+    communeName String
+}
+
+entity Arrondissement {
+	arrondissementCode Integer,
+    arrondissementName String required
+}
+
+entity Centre {
+	centreName String,
+    centreChief String
+}
+
+/**
+ * The Employee entity.
+ */
+entity Personne {
+	/**
+	* The firstname attribute.
+	*/
+	firstName String,
+	lastName String,
+	fatherName String,
+    sexe Sexe,
+	motherFirstName String,
+    motherLastName String,
+	dateOfBirthday Instant,
+    hourOfBithday Instant,
+	numberRegister Long
+}
+
+enum Sexe {
+    MASCULIN, FEMININ
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	Centre to Personne{centre},
+	/**
+	* A relationship
+	*/
+	Commune to Arrondissement{commune},
+	
+    Department to Commune{department},
+    
+    Region to Department{region},
+    
+    Arrondissement to Centre{arrondissement}
+}
+
+
+// Set pagination options
+// paginate JobHistory, Employee with infinite-scroll
+// paginate Region, Department, Commune with infinite-scroll
+paginate Personne, Arrondissement, Centre, Region, Department, Commune with pagination
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
